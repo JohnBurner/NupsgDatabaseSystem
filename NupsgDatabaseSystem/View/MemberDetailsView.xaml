@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="NupsgDatabaseSystem.View.MemberDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:View="clr-namespace:NupsgDatabaseSystem.View"
+             xmlns:VM="clr-namespace:NupsgDatabaseSystem.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="500" >
+    <UserControl.Resources>
+        <View:DateOfAdmissionToLevelConverter x:Key="DateToLevelConverter"/>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="3"/> 
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <Grid Background="White" x:Name="printPage">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition MinWidth="150"/>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition MinWidth="200"/>
+                <ColumnDefinition Width="50"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="Personal Details" Margin="10,0,0,0" FontWeight="Bold"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" Text="Last Name:"/>
+            <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding Member.LastName}"/>
+
+            <TextBlock Grid.Column="3" Grid.Row="2" Text="Other Names:"/>
+            <TextBlock Grid.Column="4" Grid.Row="2" Text="{Binding Member.FirstName }"/>
+        
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="Gender:"/>
+            <TextBlock Grid.Column="2" Grid.Row="3" Text="{Binding Member.Sex}"/>
+        
+            <TextBlock Grid.Column="3" Grid.Row="3" Text="Date Of Birth:"/>
+            <TextBlock Grid.Column="4" Grid.Row="3" Text="{Binding Member.DateOfBirth, StringFormat='\{0:dddd, MMM dd\}'}"/>
+
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Text="Academic Details" Margin="10,10,0,0" FontWeight="Bold" />
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="Program:"/>
+            <TextBlock Grid.Column="2" Grid.Row="5" Text="{Binding Member.Course.Name}"/>
+
+            <TextBlock Grid.Column="3" Grid.Row="5" Text="Index No:"/>
+            <TextBlock Grid.Column="4" Grid.Row="5" Text="{Binding Member.IndexNumber}"/>
+        
+            <TextBlock Grid.Column="1" Grid.Row="6" Text="Level:"/>
+            <TextBlock Grid.Column="2" Grid.Row="6" Text="{Binding Member.DateOfAdmission, Converter={StaticResource DateToLevelConverter}}"/>
+
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Text="Residence Details" Margin="10,10,0,0" FontWeight="Bold"/>
+            <TextBlock Grid.Column="1" Grid.Row="8" Text="Hostel:"/>
+            <TextBlock Grid.Column="2" Grid.Row="8" Text="{Binding Residence.Name}"/>
+
+            <TextBlock Grid.Column="3" Grid.Row="8" Text="Room No:"/>
+            <TextBlock Grid.Column="4" Grid.Row="8" Text="{Binding Residence.RoomNumber}"/>
+
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" Text="Contact Details" Margin="10,10,0,0" FontWeight="Bold"/>
+            <TextBlock Grid.Column="1" Grid.Row="10" Text="Phone:"/>
+            <TextBlock Grid.Column="2" Grid.Row="10" Text="{Binding Contact.PersonalPhone}"/>
+
+            <TextBlock Grid.Column="3" Grid.Row="10" Text="E-mail:"/>
+            <TextBlock Grid.Column="4" Grid.Row="10" Text="{Binding Contact.EmailAddress}"/>
+        
+            <TextBlock Grid.Column="1" Grid.Row="11" Text="Cell"/>
+            <TextBlock Grid.Column="2" Grid.Row="11" Text="{Binding Member.Cell.Name}"/>
+        
+        </Grid>
+        <Button Content="Print" Grid.Row="12" Grid.Column="3" Command="{Binding PrintCommand}" CommandParameter="{Binding ElementName=printPage}"/>
+    </StackPanel>
+</UserControl>
